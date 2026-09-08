@@ -1,0 +1,1 @@
+Flask-Migrate stores Alembic migrations here. The initial migration is generated from the SQLAlchemy models.

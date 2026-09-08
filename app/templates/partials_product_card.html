@@ -1,0 +1,13 @@
+<article class="product-card">
+  <a class="product-image" href="{{ url_for('shop.product', slug=product.slug) }}">
+    {% if product.image_url %}<img src="{{ product.image_url }}" alt="{{ product.name }}" loading="lazy">{% else %}<div class="watch-placeholder" aria-hidden="true"><div class="wp-strap"></div><div class="wp-case"><div class="wp-dial"><i></i><b></b></div></div></div>{% endif %}
+    {% if product.sale_price and product.sale_price < product.price %}<span class="badge sale">Private offer</span>{% endif %}
+    {% if product.stock <= 0 %}<span class="badge sold">Unavailable</span>{% endif %}
+  </a>
+  <div class="product-info">
+    <div class="product-category">{{ product.category.name if product.category else 'WHIMSY Collection' }}</div>
+    <h3><a href="{{ url_for('shop.product', slug=product.slug) }}">{{ product.name }}</a></h3>
+    <div class="price-row"><span class="price">PKR {{ '{:,.0f}'.format(product.current_price) }}</span>{% if product.sale_price and product.sale_price < product.price %}<del>PKR {{ '{:,.0f}'.format(product.price) }}</del>{% endif %}</div>
+    <form action="{{ url_for('cart.add', product_id=product.id) }}" method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn btn-dark btn-small" type="submit" {% if product.stock <= 0 %}disabled{% endif %}>{{ 'Unavailable' if product.stock <= 0 else 'Add to bag' }}</button></form>
+  </div>
+</article>

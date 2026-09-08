@@ -1,0 +1,43 @@
+{% extends 'base.html' %}{% block title %}WHIMSY — Men's Watches{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-copy">
+      <span class="eyebrow">WHIMSY WATCHES</span>
+      <h1>Time,<br><em>refined.</em></h1>
+      <p>Premium men's watches designed around quiet confidence, precise details and enduring style.</p>
+      <div class="hero-actions"><a class="btn btn-dark" href="{{ url_for('shop.shop') }}">Shop watches</a><a class="text-link" href="{{ url_for('shop.about') }}">Discover WHIMSY →</a></div>
+      <div class="hero-details"><span>01 / 03</span><span>Designed for the modern man</span></div>
+    </div>
+    <div class="hero-watch">
+      <img src="{{ url_for('static', filename='images/hero-watch.jpg') }}" alt="WHIMSY watch">
+    </div>
+  </div>
+</section>
+
+<section class="section"><div class="container">
+  <div class="section-heading"><div><span class="eyebrow">THE EDIT</span><h2>Featured watches</h2></div><a class="text-link" href="{{ url_for('shop.shop') }}">View collection →</a></div>
+  <div class="product-grid">{% for product in featured %}{% include 'partials_product_card.html' %}{% else %}<div class="empty-state">Your featured collection is ready for its first timepieces.</div>{% endfor %}</div>
+</div></section>
+
+<section class="section category-strip"><div class="container">
+  <div class="section-heading"><div><span class="eyebrow">EXPLORE BY STYLE</span><h2>Find your signature.</h2></div></div>
+  <div class="category-grid">{% for cat in nav_categories[:6] %}<a class="category-card" href="{{ url_for('shop.category', slug=cat.slug) }}"><span>{{ '%02d'|format(loop.index) }}</span><strong>{{ cat.name }}</strong><em>Explore collection →</em></a>{% endfor %}</div>
+</div></section>
+
+<section class="split-banner"><div class="container split-inner">
+  <div><span class="eyebrow">THE WHIMSY STANDARD</span><h2>Designed to make every moment count.</h2><p>From understated daily wear to occasions worth dressing for, WHIMSY brings a considered point of view to men's timepieces.</p><a class="btn btn-light" href="{{ url_for('shop.shop') }}">Explore the collection</a></div>
+  <div class="banner-watch" aria-hidden="true"><div class="mini-watch"><div class="mini-dial"><span></span><i></i></div></div></div>
+</div></section>
+
+<section class="section"><div class="container">
+  <div class="section-heading"><div><span class="eyebrow">JUST IN</span><h2>New arrivals</h2></div><a class="text-link" href="{{ url_for('shop.shop', sort='newest') }}">See new arrivals →</a></div>
+  <div class="product-grid">{% for product in new_arrivals %}{% include 'partials_product_card.html' %}{% endfor %}</div>
+</div></section>
+
+<section class="trust-section"><div class="container trust-grid">
+  <div><span class="trust-icon">◌</span><h3>Precision</h3><p>Thoughtful details and a clean, considered aesthetic.</p></div>
+  <div><span class="trust-icon">◇</span><h3>Timeless design</h3><p>Versatile silhouettes made to outlast passing trends.</p></div>
+  <div><span class="trust-icon">↺</span><h3>Client care</h3><p>A refined experience from choosing your watch to delivery.</p></div>
+</div></section>
+{% endblock %}

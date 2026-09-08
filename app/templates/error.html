@@ -1,0 +1,1 @@
+{% extends 'base.html' %}{% block title %}{{ code }} — Whimsy{% endblock %}{% block content %}<section class="error-page"><div class="container"><span class="error-code">{{ code }}</span><h1>{{ title }}</h1><p>{{ message }}</p><a class="btn btn-dark" href="{{ url_for('shop.home') }}">Back home</a></div></section>{% endblock %}

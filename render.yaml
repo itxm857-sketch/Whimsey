@@ -1,0 +1,24 @@
+services:
+  - type: web
+    name: whimsy-store
+    runtime: python
+    plan: free
+    buildCommand: pip install -r requirements.txt && flask --app run:app db upgrade
+    startCommand: gunicorn run:app
+    envVars:
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DATABASE_URL
+        sync: false
+      - key: SUPABASE_URL
+        sync: false
+      - key: SUPABASE_KEY
+        sync: false
+      - key: SUPABASE_SERVICE_ROLE_KEY
+        sync: false
+      - key: SUPABASE_BUCKET
+        value: product-images
+      - key: SESSION_COOKIE_SECURE
+        value: "1"
+      - key: SHIPPING_FEE
+        value: "200"
